@@ -43,4 +43,24 @@ public class HomeController {
   private String confirm(@ModelAttribute User user) {
     return "confirm";
   }
+
+  /**
+   * 完了画面へのリダイレクトパスに遷移する
+   * 
+   * @return 完了画面へのリダイレクトパス
+   */
+  @PostMapping("/register")
+  private String register() {
+    return "redirect:/complete";
+  }
+
+  /**
+   * 完了画面に遷移する
+   * 
+   * @return 完了画面へのパス
+   */
+  @GetMapping("/complete")
+  private String complete() {
+    return "complete";
+  }
 }

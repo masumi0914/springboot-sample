@@ -2,10 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>確認画面</title>
 </head>
 <body>
-  <form th:action="@{/confirm}" th:object="${user}" method="post">
+  <form th:action="@{/register}" th:object="${user}" method="post">
     <p>
       <input type="submit" value="登録" id="register">
       <input type="button" value="戻る" id="back" onclick="history.back()">
