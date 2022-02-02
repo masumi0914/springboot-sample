@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <form th:action="@{/confirm}" th:object="${user}" method="post">
+    <p>
+      <input type="submit" value="登録" id="register">
+      <input type="button" value="戻る" id="back" onclick="history.back()">
+    </p>
+    <span th:inline="text">
+      <p>氏名： [[${user.name}]]</p>
+      <p>E-Mail： [[${user.email}]]</p>
+      <p>年齢： [[${user.age}]]</p>
+    </span>
+  </form>
+</body>
+</html>
