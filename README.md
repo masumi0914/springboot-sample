@@ -7,6 +7,7 @@
 |  JVM  |  Java11  |
 |  OS  |  macOS  |
 |  IDE  |  Visual Studio Code  |
+|  RDB  |  MySQL  |
 
 ## 依存関係
 

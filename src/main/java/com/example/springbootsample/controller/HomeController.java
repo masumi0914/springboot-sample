@@ -1,16 +1,24 @@
 package com.example.springbootsample.controller;
 
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import com.example.springbootsample.model.User;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Homeコントローラークラス
  */
 @Controller
+@RequestMapping
 public class HomeController {
+
+  @Autowired
+  private JdbcTemplate jdbcTemplate;
 
   /**
    * Home画面を表示させる
@@ -18,49 +26,14 @@ public class HomeController {
    * @return Home画面へのパス
    */
   @GetMapping("/")
-  public String index() {
+  public String index(Model model) {
+    // クエリを作成
+    String sql = "SELECT * FROM test_table";
+    // クエリを実行
+    List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);
+    // Modelにlistオブジェクトを追加(viewで使用)
+    model.addAttribute("testList", list);
+    // viewファイルの指定
     return "home";
-  }
-
-  /**
-   * 入力画面へ遷移する
-   * 
-   * @param user Userオブジェクト
-   * @return 入力画面へのパス
-   */
-  @GetMapping("/form")
-  private String readForm(@ModelAttribute User user) {
-    return "form";
-  }
-
-  /**
-   * 確認画面へ遷移する
-   * 
-   * @param user Userオブジェクト
-   * @return 確認画面へのパス
-   */
-  @PostMapping("/form")
-  private String confirm(@ModelAttribute User user) {
-    return "confirm";
-  }
-
-  /**
-   * 完了画面へのリダイレクトパスに遷移する
-   * 
-   * @return 完了画面へのリダイレクトパス
-   */
-  @PostMapping("/register")
-  private String register() {
-    return "redirect:/complete";
-  }
-
-  /**
-   * 完了画面に遷移する
-   * 
-   * @return 完了画面へのパス
-   */
-  @GetMapping("/complete")
-  private String complete() {
-    return "complete";
   }
 }
