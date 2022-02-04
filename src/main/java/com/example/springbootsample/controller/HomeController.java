@@ -8,13 +8,14 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Homeコントローラークラス
  */
 @Controller
-@RequestMapping
+@RequestMapping("/")
 public class HomeController {
 
   @Autowired
@@ -35,5 +36,15 @@ public class HomeController {
     model.addAttribute("testList", list);
     // viewファイルの指定
     return "home";
+  }
+
+  /**
+   * 新規登録画面へのリダイレクトパスに遷移する
+   * 
+   * @return 新規登録入力画面へのリダイレクトパス
+   */
+  @PostMapping("/register")
+  public String view() {
+    return "redirect:/register/form";
   }
 }

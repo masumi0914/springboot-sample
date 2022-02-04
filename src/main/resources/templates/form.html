@@ -5,7 +5,7 @@
   <title>入力画面</title>
 </head>
 <body>
-  <form th:action="@{/confirm}" th:object="${user}" method="post">
+  <form th:action="@{/register/confirm}" th:object="${user}" method="post">
     <p>
       <input type="submit" value="確認" id="confirm">
       <input type="reset" value="クリア" id="reset">

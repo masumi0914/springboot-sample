@@ -5,20 +5,23 @@
   <title>Home</title>
 </head>
 <body>
-  <h2>Greetings from Spring Boot!</h2>
-  <table>
-    <tr>
-      <th>id</th>
-      <th>name</th>
-      <th>email</th>
-      <th>age</th>
-    </tr>
-    <tr th:each="test : ${testList}">
-      <td th:text="${test.id}"></td>
-      <td th:text="${test.name}"></td>
-      <td th:text="${test.email}"></td>
-      <td th:text="${test.age}"></td>
-    </tr>
-  </table>
+  <form th:action="@{/register}" method="post">
+    <h2>Greetings from Spring Boot!</h2>
+    <p><input type="submit" value="新規登録" id="register"></p>
+    <table>
+      <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>email</th>
+        <th>age</th>
+      </tr>
+      <tr th:each="test : ${testList}">
+        <td th:text="${test.id}"></td>
+        <td th:text="${test.name}"></td>
+        <td th:text="${test.email}"></td>
+        <td th:text="${test.age}"></td>
+      </tr>
+    </table>
+  </form>
 </body>
 </html>

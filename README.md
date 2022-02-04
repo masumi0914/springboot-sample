@@ -7,7 +7,8 @@
 |  JVM  |  Java11  |
 |  OS  |  macOS  |
 |  IDE  |  Visual Studio Code  |
-|  RDB  |  MySQL  |
+|  RDBMS  |  MySQL  |
+|  Build Tool  |  Maeven  |
 
 ## 依存関係
 
