@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>確認画面</title>
-</head>
+<head th:replace="common/head :: head_fragment(title = 'ユーザー登録確認画面', scripts = ~{::script}, links = ~{::link})"></head>
 <body>
-  <form th:action="@{/register/complete}" th:object="${user}" method="post">
-    <p>
-      <input type="submit" value="登録" id="register">
-      <input type="button" value="戻る" id="back" onclick="history.back()">
-    </p>
-    <span th:inline="text">
-      <p>氏名： [[${user.name}]]</p>
-      <p>E-Mail： [[${user.email}]]</p>
-      <p>年齢： [[${user.age}]]</p>
-    </span>
-  </form>
+  <div class="box">
+    <div class="box-header">
+      <h2>ユーザー登録</h2>
+    </div>
+    <div class="box-body">
+      <form th:action="@{/register/complete}" th:object="${user}" method="post">
+        <p>
+          <input type="submit" value="登録" class="btn btn-primary">
+          <input type="button" value="戻る" class="btn btn-default" onclick="history.back()">
+        </p>
+        <span th:inline="text">
+          <p>NAME： [[${user.name}]]</p>
+          <p>EMAIL： [[${user.email}]]</p>
+          <p>AGE： [[${user.age}]]</p>
+        </span>
+      </form>
+    </div>
+  </div>
 </body>
 </html>

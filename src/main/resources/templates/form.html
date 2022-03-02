@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>入力画面</title>
-</head>
+<head th:replace="common/head :: head_fragment(title = 'ユーザー登録入力画面', scripts = ~{::script}, links = ~{::link})"></head>
 <body>
-  <form th:action="@{/register/confirm}" th:object="${user}" method="post">
-    <p>
-      <input type="submit" value="確認" id="confirm">
-      <input type="reset" value="クリア" id="reset">
-    </p>
-    <p>
-      <label for="name">氏名：</label>
-      <input type="text" th:field="*{name}">
-    </p>
-    <p>
-      <label for="email">E-Mail：</label>
-      <input type="email" th:field="*{email}">
-    </p>
-    <p>
-      <label for="age">年齢：</label>
-      <input type="number" th:field="*{age}"><br>
-    </p>
-  </form>
+  <div class="box">
+    <div class="box-header">
+      <h2>ユーザー登録</h2>
+    </div>
+    <div class="box-body">
+      <form th:action="@{/register/confirm}" th:object="${user}" method="post">
+        <p>
+          <input type="submit" value="確認" class="btn btn-primary">
+          <input type="reset" value="クリア" class="btn btn-default">
+        </p>
+        <p>
+          <label for="name">NAME：</label>
+          <input type="text" th:field="*{name}">
+        </p>
+        <p>
+          <label for="email">EMAIL：</label>
+          <input type="email" th:field="*{email}">
+        </p>
+        <p>
+          <label for="age">AGE：</label>
+          <input type="number" th:field="*{age}">
+        </p>
+      </form>
+    </div>
+  </div>
 </body>
 </html>

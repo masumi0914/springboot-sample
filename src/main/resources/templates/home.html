@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>Home</title>
-</head>
+<head th:replace="common/head :: head_fragment(title = 'Home', scripts = ~{::script}, links = ~{::link})"></head>
 <body>
-  <form th:action="@{/register}" method="post">
-    <h2>Greetings from Spring Boot!</h2>
-    <p><input type="submit" value="新規登録" id="register"></p>
-    <table>
-      <tr>
-        <th>id</th>
-        <th>name</th>
-        <th>email</th>
-        <th>age</th>
-      </tr>
-      <tr th:each="test : ${testList}">
-        <td th:text="${test.id}"></td>
-        <td th:text="${test.name}"></td>
-        <td th:text="${test.email}"></td>
-        <td th:text="${test.age}"></td>
-      </tr>
-    </table>
-  </form>
+  <div class="box">
+    <div class="box-header">
+      <h2>ユーザー一覧</h2>
+    </div>
+    <div class="box-body">
+      <form th:action="@{/register}" method="post">
+        <p><input type="submit" value="新規登録" class="btn btn-primary"></p>
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>NAME</th>
+              <th>EMAIL</th>
+              <th>AGE</th>
+            </tr>
+          </thead>
+          <tr th:each="test : ${testList}" class="align-middle">
+            <td th:text="${test.id}"></td>
+            <td th:text="${test.name}"></td>
+            <td th:text="${test.email}"></td>
+            <td th:text="${test.age}"></td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </div>
 </body>
 </html>
