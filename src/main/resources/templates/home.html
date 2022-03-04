@@ -9,23 +9,30 @@
     <div class="box-body">
       <form th:action="@{/register}" method="post">
         <p><input type="submit" value="新規登録" class="btn btn-primary"></p>
-        <table class="table table-striped table-bordered">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>NAME</th>
-              <th>EMAIL</th>
-              <th>AGE</th>
-            </tr>
-          </thead>
-          <tr th:each="test : ${testList}" class="align-middle">
-            <td th:text="${test.id}"></td>
-            <td th:text="${test.name}"></td>
-            <td th:text="${test.email}"></td>
-            <td th:text="${test.age}"></td>
-          </tr>
-        </table>
       </form>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>EMAIL</th>
+            <th>AGE</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tr th:each="user : ${userList}" class="align-middle">
+          <td th:text="${user.id}"></td>
+          <td th:text="${user.name}"></td>
+          <td th:text="${user.email}"></td>
+          <td th:text="${user.age}"></td>
+          <td>
+            <form th:action="@{/delete}" method="post">
+              <input type="button" value="削除" class="btn btn-default deleteButton"></input>
+              <input type="hidden" th:value="${user.id}" name="id"></input>
+            </form>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
 </body>
