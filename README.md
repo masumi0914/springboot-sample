@@ -8,7 +8,7 @@
 |  OS  |  macOS  |
 |  IDE  |  Visual Studio Code  |
 |  RDBMS  |  MySQL  |
-|  Build Tool  |  Maeven  |
+|  Build Tool  |  Maven  |
 
 ## 依存関係
 
