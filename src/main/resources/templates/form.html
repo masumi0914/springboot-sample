@@ -8,22 +8,24 @@
     </div>
     <div class="box-body">
       <form th:action="@{/register/confirm}" th:object="${user}" method="post">
-        <p>
-          <input type="submit" value="確認" class="btn btn-primary">
-          <input type="reset" value="クリア" class="btn btn-default">
-        </p>
-        <p>
-          <label for="name">NAME：</label>
-          <input type="text" th:field="*{name}">
-        </p>
-        <p>
-          <label for="email">EMAIL：</label>
-          <input type="email" th:field="*{email}">
-        </p>
-        <p>
-          <label for="age">AGE：</label>
-          <input type="number" th:field="*{age}">
-        </p>
+        <div class="row">
+          <div class="col-md-12 form-group">
+            <input type="submit" value="確認" class="btn btn-primary">
+            <input type="reset" value="クリア" class="btn btn-default">
+          </div>
+          <div class="col-md-12 form-group">
+            <label for="name" class="col-md-2">NAME：</label>
+            <input type="text" th:field="*{name}">
+          </div>
+          <div class="col-md-12 form-group">
+            <label for="email" class="col-md-2">EMAIL：</label>
+            <input type="email" th:field="*{email}">
+          </div>
+          <div class="col-md-12 form-group">
+            <label for="age" class="col-md-2">AGE：</label>
+            <input type="number" th:field="*{age}">
+          </div>
+        </div>
       </form>
     </div>
   </div>

@@ -8,15 +8,24 @@
     </div>
     <div class="box-body">
       <form th:action="@{/register/complete}" th:object="${user}" method="post">
-        <p>
-          <input type="submit" value="登録" class="btn btn-primary">
-          <input type="button" value="戻る" class="btn btn-default" onclick="history.back()">
-        </p>
-        <span th:inline="text">
-          <p>NAME： [[${user.name}]]</p>
-          <p>EMAIL： [[${user.email}]]</p>
-          <p>AGE： [[${user.age}]]</p>
-        </span>
+        <div class="row">
+          <div class="col-md-12 form-group">
+            <input type="submit" value="登録" class="btn btn-primary">
+            <input type="button" value="戻る" class="btn btn-default" onclick="history.back()">
+          </div>
+          <div class="col-md-12 form-group">
+            <label for="name" class="col-md-2">NAME：</label>
+            <span th:inline="text">[[${user.name}]]</span>
+          </div>
+          <div class="col-md-12 form-group">
+            <label for="email" class="col-md-2">EMAIL：</label>
+            <span th:inline="text">[[${user.email}]]</span>
+          </div>
+          <div class="col-md-12 form-group">
+            <label for="age" class="col-md-2">AGE：</label>
+            <span th:inline="text">[[${user.age}]]</span>
+          </div>
+        </div>
       </form>
     </div>
   </div>

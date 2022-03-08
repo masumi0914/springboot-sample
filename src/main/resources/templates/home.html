@@ -6,33 +6,55 @@
     <div class="box-header">
       <h2>ユーザー一覧</h2>
     </div>
-    <div class="box-body">
-      <form th:action="@{/register}" method="post">
-        <p><input type="submit" value="新規登録" class="btn btn-primary"></p>
+
+    <div class="box-body search-box">
+      <form th:action="@{/}" method="get">
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="name" class="col-md-2">NAME：</label>
+            <input type="text" name="name">
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="email" class="col-md-2">EMAIL：</label>
+            <input type="email" name="email">
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="age" class="col-md-2">AGE：</label>
+            <input type="number" name="age">
+          </div>
+        </div>
+        <input type="button" value="検索" class="btn btn-default btn-block searchButton" data-action="/search">
       </form>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>NAME</th>
-            <th>EMAIL</th>
-            <th>AGE</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tr th:each="user : ${userList}" class="align-middle">
-          <td th:text="${user.id}"></td>
-          <td th:text="${user.name}"></td>
-          <td th:text="${user.email}"></td>
-          <td th:text="${user.age}"></td>
-          <td>
-            <form th:action="@{/delete}" method="post">
-              <input type="button" value="削除" class="btn btn-default deleteButton"></input>
+    </div>
+
+    <div class="box-body list-view">
+      <form method="post">
+        <p>
+          <input type="button" value="新規登録" class="btn btn-primary registerButton" data-action="/register">
+          <input type="button" value="ダウンロード" class="btn btn-default downloadButton" data-action="/download">
+        </p>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>NAME</th>
+              <th>EMAIL</th>
+              <th>AGE</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tr th:each="user : ${userList}" class="align-middle">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.age}"></td>
+            <td>
+              <input type="button" value="削除" class="btn btn-default deleteButton" data-action="/delete"></input>
               <input type="hidden" th:value="${user.id}" name="id"></input>
-            </form>
-          </td>
-        </tr>
-      </table>
+            </td>
+          </tr>
+        </table>
+      </form>
     </div>
   </div>
 </body>

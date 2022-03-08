@@ -12,7 +12,7 @@
 }
 .box-body {
   position: relative;
-  padding: 10px 15px 0px 15px;
+  padding: 10px 15px 30px 15px;
 }
 .btn {
   border-radius: 3px;
@@ -32,4 +32,11 @@
 }
 .btn-default:hover, .btn-default:active {
   background-color: #cecccc;
+}
+.btn-block {
+  display: block;
+  width: 100%;
+}
+.form-group {
+  margin-bottom: 15px;
 }
