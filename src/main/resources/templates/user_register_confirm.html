@@ -7,7 +7,7 @@
       <h2>ユーザー登録</h2>
     </div>
     <div class="box-body">
-      <form th:action="@{/register/complete}" th:object="${user}" method="post">
+      <form th:action="@{/register/complete}" th:object="${userRegisterForm}" method="post">
         <div class="row">
           <div class="col-md-12 form-group">
             <input type="submit" value="登録" class="btn btn-primary">
@@ -15,15 +15,15 @@
           </div>
           <div class="col-md-12 form-group">
             <label for="name" class="col-md-2">NAME：</label>
-            <span th:inline="text">[[${user.name}]]</span>
+            <span th:inline="text">[[${userRegisterForm.name}]]</span>
           </div>
           <div class="col-md-12 form-group">
             <label for="email" class="col-md-2">EMAIL：</label>
-            <span th:inline="text">[[${user.email}]]</span>
+            <span th:inline="text">[[${userRegisterForm.email}]]</span>
           </div>
           <div class="col-md-12 form-group">
             <label for="age" class="col-md-2">AGE：</label>
-            <span th:inline="text">[[${user.age}]]</span>
+            <span th:inline="text">[[${userRegisterForm.age}]]</span>
           </div>
         </div>
       </form>

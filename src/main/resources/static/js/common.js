@@ -1,6 +1,8 @@
 $(function() {
   $('.registerButton').on('click', function() {
-    submitForm(this);
+    var form = $(this).parents('form');
+    form.attr('action', $(this).data('action'));
+    form.submit();
   });
 
   $('.downloadButton').on('click', function() {
@@ -11,12 +13,7 @@ $(function() {
     if(! window.confirm('削除します。よろしいですか？')) {
       return;
     }
-    submitForm(this);
-  });
-
-  function submitForm(_this) {
-    var form = $(_this).parents('form');
-    form.attr('action', $(_this).data('action'));
+    var form = $(this).parents('form');
     form.submit();
-  }
+  });
 });

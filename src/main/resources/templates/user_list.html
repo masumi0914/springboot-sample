@@ -8,53 +8,55 @@
     </div>
 
     <div class="box-body search-box">
-      <form th:action="@{/}" method="get">
+      <form th:action="@{/}" method="get" th:object="${form}">
         <div class="row">
           <div class="col-md-6 form-group">
             <label for="name" class="col-md-2">NAME：</label>
-            <input type="text" name="name">
+            <input type="text" name="name" th:value="${form.name}">
           </div>
           <div class="col-md-6 form-group">
             <label for="email" class="col-md-2">EMAIL：</label>
-            <input type="email" name="email">
+            <input type="email" name="email" th:value="${form.email}">
           </div>
           <div class="col-md-6 form-group">
             <label for="age" class="col-md-2">AGE：</label>
-            <input type="number" name="age">
+            <input type="number" name="age" th:value="${form.age}">
           </div>
         </div>
-        <input type="button" value="検索" class="btn btn-default btn-block searchButton" data-action="/search">
+        <input type="submit" value="検索" class="btn btn-default btn-block">
       </form>
     </div>
 
     <div class="box-body list-view">
-      <form method="post">
-        <p>
+      <p>
+        <form method="post">
           <input type="button" value="新規登録" class="btn btn-primary registerButton" data-action="/register">
           <input type="button" value="ダウンロード" class="btn btn-default downloadButton" data-action="/download">
-        </p>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>NAME</th>
-              <th>EMAIL</th>
-              <th>AGE</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tr th:each="user : ${userList}" class="align-middle">
-            <td th:text="${user.id}"></td>
-            <td th:text="${user.name}"></td>
-            <td th:text="${user.email}"></td>
-            <td th:text="${user.age}"></td>
-            <td>
+        </form>
+      </p>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>EMAIL</th>
+            <th>AGE</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tr th:each="user : ${userList}" class="align-middle">
+          <td th:text="${user.id}"></td>
+          <td th:text="${user.name}"></td>
+          <td th:text="${user.email}"></td>
+          <td th:text="${user.age}"></td>
+          <td>
+            <form th:action="@{/delete}" method="post">
               <input type="button" value="削除" class="btn btn-default deleteButton" data-action="/delete"></input>
               <input type="hidden" th:value="${user.id}" name="id"></input>
-            </td>
-          </tr>
-        </table>
-      </form>
+            </form>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
 </body>

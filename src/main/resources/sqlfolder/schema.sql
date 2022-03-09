@@ -6,5 +6,6 @@ CREATE TABLE test_table
   name VARCHAR(100),
   email VARCHAR(100),
   age INT,
+  state SMALLINT DEFAULT 1,
   PRIMARY KEY(id)
 );

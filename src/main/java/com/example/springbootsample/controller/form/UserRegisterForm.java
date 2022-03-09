@@ -1,9 +1,9 @@
-package com.example.springbootsample.model;
+package com.example.springbootsample.controller.form;
 
 /**
- * Userオブジェクトクラス
+ * 登録画面からの入力値を格納するためのクラス
  */
-public class User {
+public class UserRegisterForm {
   private String name;
   private String email;
   private Integer age;

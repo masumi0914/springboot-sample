@@ -10,62 +10,68 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.example.springbootsample.model.User;
+import com.example.springbootsample.controller.form.UserRegisterForm;
 
 /**
  * UserRegisterコントローラークラス
  * 
- * 画面からの入力値をUserオブジェクトに格納する
- * Userオブジェクトは、セッションとして持たせ画面間で持ち回す
+ * 画面からの入力値をUserRegisterFormオブジェクトに格納する
+ * UserRegisterFormオブジェクトは、セッションとして持たせ画面間で持ち回す
  */
 @Controller
 @RequestMapping("/register")
-@SessionAttributes(value = "user")
+@SessionAttributes(types = UserRegisterForm.class)
 public class UserRegisterController {
 
   @Autowired
   private JdbcTemplate jdbcTemplate;
 
-  @ModelAttribute("user")
-  private User user() {
-    return new User();
+  /**
+   * オブジェクトをHTTPセッションに追加する
+   * 
+   * @return UserRegisterFormオブジェクト
+   */
+  @ModelAttribute("userRegisterForm")
+  public UserRegisterForm setForm() {
+    return new UserRegisterForm();
   }
 
   /**
    * 入力画面へ遷移する
    * 
-   * @param user Userオブジェクト
+   * @param UserRegisterForm
    * @return 入力画面へのパス
    */
   @GetMapping("/form")
-  private String form(@ModelAttribute User user) {
-    return "form";
+  private String form(@ModelAttribute UserRegisterForm userRegisterForm) {
+    return "user_register_form";
   }
 
   /**
    * 確認画面へ遷移する
    * （自動的にUserオブジェクトが生成されセッションに格納される）
    * 
-   * @param user Userオブジェクト
+   * @param UserRegisterForm
    * @return 確認画面へのパス
    */
   @PostMapping("/confirm")
-  private String confirm(@ModelAttribute User user) {
-    return "confirm";
+  private String confirm(@ModelAttribute UserRegisterForm userRegisterForm) {
+    return "user_register_confirm";
   }
 
   /**
    * DBに画面からの入力値を登録し、Home画面へ遷移する
    * 
-   * @param sessionStatus セッションステータス
+   * @param UserRegisterForm
+   * @param sessionStatus    セッションステータス
    * @return Home画面へのリダイレクトパス
    */
   @PostMapping("/complete")
-  private String complete(@ModelAttribute User user, SessionStatus sessionStatus) {
+  private String complete(@ModelAttribute UserRegisterForm userRegisterForm, SessionStatus sessionStatus) {
     // クエリを作成
     String sql = "INSERT INTO test_table(name, email, age) VALUES(?, ?, ?);";
     // クエリを実行
-    jdbcTemplate.update(sql, user.getName(), user.getEmail(), user.getAge());
+    jdbcTemplate.update(sql, userRegisterForm.getName(), userRegisterForm.getEmail(), userRegisterForm.getAge());
     // セッションを破棄
     sessionStatus.setComplete();
     return "redirect:/";
