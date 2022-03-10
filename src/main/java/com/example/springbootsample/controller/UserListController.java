@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import com.example.springbootsample.entity.User;
 import com.example.springbootsample.controller.form.UserSearchForm;
+import com.example.springbootsample.service.UserService;
 
 /**
  * UserListコントローラークラス
@@ -26,6 +28,13 @@ public class UserListController {
   @Autowired
   private NamedParameterJdbcTemplate jdbcTemplate;
 
+  private final UserService userService;
+
+  @Autowired
+  public UserListController(UserService userService) {
+    this.userService = userService;
+  }
+
   /**
    * ユーザー一覧画面を表示させる
    * 
@@ -35,27 +44,8 @@ public class UserListController {
    */
   @GetMapping("/")
   public String index(@ModelAttribute UserSearchForm form, Model model) {
-    StringBuilder sqlBuilder = new StringBuilder();
-    sqlBuilder.append("SELECT * FROM test_table WHERE state = 1");
-
-    Map<String, Object> param = new HashMap<>();
-    // 入力値が空でない場合、WHERE句にセット
-    if (form.getName() != null && form.getName() != "") {
-      sqlBuilder.append(" AND name = :name");
-      param.put("name", form.getName());
-    }
-    if (form.getEmail() != null && form.getEmail() != "") {
-      sqlBuilder.append(" AND email = :email");
-      param.put("email", form.getEmail());
-    }
-    if (form.getAge() != null) {
-      sqlBuilder.append(" AND age = :age");
-      param.put("age", form.getAge());
-    }
-
-    String sql = sqlBuilder.toString();
     // ユーザー一覧を取得
-    List<Map<String, Object>> list = jdbcTemplate.queryForList(sql, param);
+    List<User> list = userService.getUserList(form);
 
     // 画面にデータを渡す
     model.addAttribute("userList", list);

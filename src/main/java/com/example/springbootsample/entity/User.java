@@ -4,9 +4,14 @@ package com.example.springbootsample.entity;
  * Userテーブルのデータ格納用クラス
  */
 public class User {
+  private Integer id;
   private String name;
   private String email;
   private Integer age;
+
+  public Integer getId() {
+    return id;
+  }
 
   public String getName() {
     return name;
@@ -18,6 +23,10 @@ public class User {
 
   public Integer getAge() {
     return age;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
   }
 
   public void setName(String name) {
