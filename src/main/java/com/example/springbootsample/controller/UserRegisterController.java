@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.example.springbootsample.controller.form.UserRegisterForm;
+import com.example.springbootsample.service.UserService;
 
 /**
  * UserRegisterコントローラークラス
@@ -23,8 +23,12 @@ import com.example.springbootsample.controller.form.UserRegisterForm;
 @SessionAttributes(types = UserRegisterForm.class)
 public class UserRegisterController {
 
+  private final UserService userService;
+
   @Autowired
-  private JdbcTemplate jdbcTemplate;
+  public UserRegisterController(UserService userService) {
+    this.userService = userService;
+  }
 
   /**
    * オブジェクトをHTTPセッションに追加する
@@ -63,17 +67,16 @@ public class UserRegisterController {
    * DBに画面からの入力値を登録し、Home画面へ遷移する
    * 
    * @param UserRegisterForm
-   * @param sessionStatus    セッションステータス
+   * @param sessionStatus
    * @return Home画面へのリダイレクトパス
    */
   @PostMapping("/complete")
   private String complete(@ModelAttribute UserRegisterForm userRegisterForm, SessionStatus sessionStatus) {
-    // クエリを作成
-    String sql = "INSERT INTO test_table(name, email, age) VALUES(?, ?, ?);";
-    // クエリを実行
-    jdbcTemplate.update(sql, userRegisterForm.getName(), userRegisterForm.getEmail(), userRegisterForm.getAge());
+    // DBに登録
+    userService.insert(userRegisterForm);
     // セッションを破棄
     sessionStatus.setComplete();
+
     return "redirect:/";
   }
 }

@@ -9,8 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.example.springbootsample.controller.form.UserSearchForm;
 import com.example.springbootsample.entity.User;
+import com.example.springbootsample.controller.form.UserSearchForm;
+import com.example.springbootsample.controller.form.UserRegisterForm;
 
 @Repository
 public class UserDao implements IUserDao {
@@ -19,7 +20,7 @@ public class UserDao implements IUserDao {
   private NamedParameterJdbcTemplate jdbcTemplate;
 
   @Override
-  public List<User> getUserList(UserSearchForm form) {
+  public List<User> getList(UserSearchForm form) {
     StringBuilder sqlBuilder = new StringBuilder();
     sqlBuilder.append("SELECT * FROM test_table WHERE state = 1");
 
@@ -54,5 +55,33 @@ public class UserDao implements IUserDao {
       list.add(user);
     }
     return list;
+  }
+
+  @Override
+  public int insert(UserRegisterForm form) {
+    int count = 0;
+    String sql = "INSERT INTO test_table(name, email, age) VALUES(:name, :email, :age);";
+
+    Map<String, Object> param = new HashMap<>();
+    // paramを設定
+    param.put("name", form.getName());
+    param.put("email", form.getEmail());
+    param.put("age", form.getAge());
+
+    count = jdbcTemplate.update(sql, param);
+    return count;
+  }
+
+  @Override
+  public int delete(Integer id) {
+    int count = 0;
+    String sql = "UPDATE test_table SET state = 0 WHERE id = :id";
+
+    Map<String, Object> param = new HashMap<>();
+    // paramを設定
+    param.put("id", id);
+
+    count = jdbcTemplate.update(sql, param);
+    return count;
   }
 }
