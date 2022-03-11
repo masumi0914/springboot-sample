@@ -1,4 +1,4 @@
-package com.example.springbootsample.repository;
+package com.example.springbootsample.domain.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.example.springbootsample.entity.User;
 import com.example.springbootsample.controller.form.UserSearchForm;
+import com.example.springbootsample.domain.entity.User;
 import com.example.springbootsample.controller.form.UserRegisterForm;
 
 @Repository

@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import com.example.springbootsample.entity.User;
 import com.example.springbootsample.controller.form.UserSearchForm;
+import com.example.springbootsample.domain.entity.User;
 import com.example.springbootsample.service.UserService;
 
 /**
