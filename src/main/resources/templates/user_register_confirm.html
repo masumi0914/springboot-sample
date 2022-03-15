@@ -9,9 +9,9 @@
     <div class="box-body">
       <form th:action="@{/register/complete}" th:object="${userRegisterForm}" method="post">
         <div class="row">
-          <div class="col-md-12 form-group">
-            <input type="submit" value="登録" class="btn btn-primary">
-            <input type="button" value="戻る" class="btn btn-default" onclick="history.back()">
+          <div class="col-md-12 form-group row-buttons">
+            <input type="submit" value="登録" class="btn btn-primary row-button">
+            <input type="button" value="戻る" class="btn btn-default row-button" onclick="history.back()">
           </div>
           <div class="col-md-12 form-group">
             <label for="name" class="col-md-2">NAME：</label>

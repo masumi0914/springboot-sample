@@ -29,10 +29,14 @@
 
     <div class="box-body list-view">
       <p>
-        <form method="post">
-          <input type="button" value="新規登録" class="btn btn-primary registerButton" data-action="/register">
-          <input type="button" value="ダウンロード" class="btn btn-default downloadButton" data-action="/download">
-        </form>
+        <div class="row-buttons">
+          <form method="post" th:action="@{/register}">
+            <input type="submit" value="新規登録" class="btn btn-primary row-button">
+          </form>
+          <form method="get" th:action="@{/test.csv}">
+            <input type="submit" value="ダウンロード" class="btn btn-default row-button">
+          </form>
+        </div>
       </p>
       <table class="table table-striped">
         <thead>
