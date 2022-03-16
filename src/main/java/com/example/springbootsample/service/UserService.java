@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.springbootsample.controller.form.UserSearchForm;
-import com.example.springbootsample.domain.dao.IUserDao;
 import com.example.springbootsample.domain.entity.User;
+import com.example.springbootsample.repository.IUserDao;
 import com.example.springbootsample.controller.form.UserRegisterForm;
 
 @Service
@@ -22,7 +22,7 @@ public class UserService {
     this.dao = dao;
   }
 
-  public List<User> getUserList(UserSearchForm form) {
+  public List<User> getList(UserSearchForm form) {
     return dao.getList(form);
   }
 

@@ -1,4 +1,4 @@
-package com.example.springbootsample.domain.dao;
+package com.example.springbootsample.repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
