@@ -1,7 +1,10 @@
 package com.example.springbootsample.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,6 +39,9 @@ public class UserListController {
     this.userService = userService;
   }
 
+  @Autowired
+  HttpSession session;
+
   /**
    * ユーザー一覧画面を表示させる
    * 
@@ -46,7 +52,10 @@ public class UserListController {
   @GetMapping("/")
   public String index(@ModelAttribute UserSearchForm form, Model model) {
     // ユーザー一覧を取得
-    List<User> list = userService.getUserList(form);
+    List<User> list = userService.getList(form);
+
+    // ユーザー一覧をセッションに保存する
+    session.setAttribute("list", list);
 
     // 画面にデータを渡す
     model.addAttribute("userList", list);
@@ -82,19 +91,33 @@ public class UserListController {
   /**
    * CSVをダウンロードする
    * 
-   * @param form
    * @return
    * @throws JsonProcessingException
    */
   @GetMapping(value = "*.csv", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
       + "; charset=Shift_JIS; Content-Disposition: attachment")
   @ResponseBody
-  public Object download(@ModelAttribute UserSearchForm form) throws JsonProcessingException {
-    // DBから取得
-    List<User> list = userService.getUserList(form);
+  public Object download() throws JsonProcessingException {
+    // sessionに保持されているユーザー一覧を取得する
+    Object list = session.getAttribute("list");
+
+    // listをObjectからList<User>にキャストする
+    List<User> users = new ArrayList<User>();
+    if (list instanceof ArrayList<?>) {
+      ArrayList<?> al = (ArrayList<?>) list;
+      if (al.size() > 0) {
+        for (int i = 0; i < al.size(); i++) {
+          Object o = al.get(i);
+          if (o instanceof User) {
+            User v = (User) o;
+            users.add(v);
+          }
+        }
+      }
+    }
 
     // Dtoに詰め直す
-    List<UserCsv> csvs = list.stream().map(
+    List<UserCsv> csvs = users.stream().map(
         e -> new UserCsv(e.getId(), e.getName(), e.getEmail(), e.getAge())).collect(Collectors.toList());
 
     // Csvをダウンロードする
