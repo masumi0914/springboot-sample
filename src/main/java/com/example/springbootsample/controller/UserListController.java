@@ -1,8 +1,6 @@
 package com.example.springbootsample.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,10 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.springbootsample.controller.form.UserSearchForm;
 import com.example.springbootsample.service.UserService;
+import com.example.springbootsample.service.CsvService;
 import com.example.springbootsample.domain.entity.User;
-import com.example.springbootsample.domain.dto.UserCsv;
-import com.fasterxml.jackson.dataformat.csv.CsvMapper;
-import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 /**
@@ -32,15 +28,17 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 @RequestMapping("/")
 public class UserListController {
 
-  private final UserService userService;
-
-  @Autowired
-  public UserListController(UserService userService) {
-    this.userService = userService;
-  }
-
   @Autowired
   HttpSession session;
+
+  private final UserService userService;
+  private final CsvService csvService;
+
+  @Autowired
+  public UserListController(UserService userService, CsvService csvService) {
+    this.userService = userService;
+    this.csvService = csvService;
+  }
 
   /**
    * ユーザー一覧画面を表示させる
@@ -100,30 +98,7 @@ public class UserListController {
   public Object download() throws JsonProcessingException {
     // sessionに保持されているユーザー一覧を取得する
     Object list = session.getAttribute("list");
-
-    // listをObjectからList<User>にキャストする
-    List<User> users = new ArrayList<User>();
-    if (list instanceof ArrayList<?>) {
-      ArrayList<?> al = (ArrayList<?>) list;
-      if (al.size() > 0) {
-        for (int i = 0; i < al.size(); i++) {
-          Object o = al.get(i);
-          if (o instanceof User) {
-            User v = (User) o;
-            users.add(v);
-          }
-        }
-      }
-    }
-
-    // Dtoに詰め直す
-    List<UserCsv> csvs = users.stream().map(
-        e -> new UserCsv(e.getId(), e.getName(), e.getEmail(), e.getAge())).collect(Collectors.toList());
-
-    // Csvをダウンロードする
-    CsvMapper mapper = new CsvMapper();
-    CsvSchema schema = mapper.schemaFor(UserCsv.class).withHeader();
-
-    return mapper.writer(schema).writeValueAsString(csvs);
+    // csvをダウンロードする
+    return csvService.load(list);
   }
 }
