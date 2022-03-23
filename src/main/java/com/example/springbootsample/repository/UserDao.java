@@ -22,7 +22,7 @@ public class UserDao implements IUserDao {
   @Override
   public List<User> getList(UserSearchForm form) {
     StringBuilder sqlBuilder = new StringBuilder();
-    sqlBuilder.append("SELECT * FROM test_table WHERE state = 1");
+    sqlBuilder.append("SELECT * FROM users WHERE state = 1");
 
     Map<String, Object> param = new HashMap<>();
     // 入力値が空でない場合、WHERE句にセット
@@ -60,7 +60,7 @@ public class UserDao implements IUserDao {
   @Override
   public int insert(UserRegisterForm form) {
     int count = 0;
-    String sql = "INSERT INTO test_table(name, email, age) VALUES(:name, :email, :age);";
+    String sql = "INSERT INTO users(name, email, age) VALUES(:name, :email, :age);";
 
     Map<String, Object> param = new HashMap<>();
     // paramを設定
@@ -75,7 +75,7 @@ public class UserDao implements IUserDao {
   @Override
   public int delete(Integer id) {
     int count = 0;
-    String sql = "UPDATE test_table SET state = 0 WHERE id = :id";
+    String sql = "UPDATE users SET state = 0 WHERE id = :id";
 
     Map<String, Object> param = new HashMap<>();
     // paramを設定
