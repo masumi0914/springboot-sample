@@ -10,4 +10,5 @@ public class UserRegisterForm {
   private String name;
   private String email;
   private Integer age;
+  private String password;
 }

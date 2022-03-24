@@ -60,13 +60,14 @@ public class UserDao implements IUserDao {
   @Override
   public int insert(UserRegisterForm form) {
     int count = 0;
-    String sql = "INSERT INTO users(name, email, age) VALUES(:name, :email, :age);";
+    String sql = "INSERT INTO users(name, email, age, password) VALUES(:name, :email, :age, :password);";
 
     Map<String, Object> param = new HashMap<>();
     // paramを設定
     param.put("name", form.getName());
     param.put("email", form.getEmail());
     param.put("age", form.getAge());
+    param.put("password", form.getPassword());
 
     count = jdbcTemplate.update(sql, param);
     return count;

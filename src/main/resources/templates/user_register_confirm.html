@@ -14,16 +14,20 @@
             <input type="button" value="戻る" class="btn btn-default row-button" onclick="history.back()">
           </div>
           <div class="col-md-12 form-group">
-            <label for="name" class="col-md-2">NAME：</label>
+            <label for="name" class="col-md-2">NAME :</label>
             <span th:inline="text">[[${userRegisterForm.name}]]</span>
           </div>
           <div class="col-md-12 form-group">
-            <label for="email" class="col-md-2">EMAIL：</label>
+            <label for="email" class="col-md-2">EMAIL :</label>
             <span th:inline="text">[[${userRegisterForm.email}]]</span>
           </div>
           <div class="col-md-12 form-group">
-            <label for="age" class="col-md-2">AGE：</label>
+            <label for="age" class="col-md-2">AGE :</label>
             <span th:inline="text">[[${userRegisterForm.age}]]</span>
+          </div>
+          <div class="col-md-12 form-group">
+            <label for="password" class="col-md-2">PASSWORD :</label>
+            <span th:inline="text">[[${userRegisterForm.password}]]</span>
           </div>
         </div>
       </form>
