@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/head :: head_fragment(title = 'ログイン画面', scripts = ~{::script}, links = ~{::link})"></head>
+<body>
+  <div class="box">
+    <div class="box-header">
+      <h2>Spring Boot Sample App</h2>
+    </div>
+    <div class="box-body">
+      <div th:if="${param.error}" class="alert alert-danger">
+        名前またはパスワードが正しくありません
+      </div>
+      <form th:action="@{/login}" method="post">
+        <div class="row">
+          <div class="col-md-12 form-group">
+            <label for="email" class="col-md-2">Email :</label>
+            <input type="text" name="email" id="email" required>
+          </div>
+          <div class="col-md-12 form-group">
+            <label for="password" class="col-md-2">Password :</label>
+            <input type="password" name="password" id="password" required>
+          </div>
+          <div class="col-md-12 form-group row-buttons">
+            <input type="submit" value="ログイン" class="btn btn-primary row-button">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

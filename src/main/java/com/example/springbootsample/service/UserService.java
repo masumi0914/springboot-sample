@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.example.springbootsample.controller.form.UserSearchForm;
 import com.example.springbootsample.domain.entity.User;
@@ -27,6 +28,10 @@ public class UserService {
   }
 
   public int insert(UserRegisterForm form) {
+    // パスワードをhash化して、formオブジェクトにセットする
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    form.setPassword(passwordEncoder.encode(form.getPassword()));
+
     return dao.insert(form);
   }
 

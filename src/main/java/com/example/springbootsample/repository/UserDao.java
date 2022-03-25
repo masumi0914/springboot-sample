@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import com.example.springbootsample.controller.form.UserSearchForm;
 import com.example.springbootsample.domain.entity.User;
@@ -22,7 +24,8 @@ public class UserDao implements IUserDao {
   @Override
   public List<User> getList(UserSearchForm form) {
     StringBuilder sqlBuilder = new StringBuilder();
-    sqlBuilder.append("SELECT * FROM users WHERE state = 1");
+    sqlBuilder.append("SELECT * FROM users "
+        + "WHERE state = 1 ");
 
     Map<String, Object> param = new HashMap<>();
     // 入力値が空でない場合、WHERE句にセット
@@ -58,9 +61,36 @@ public class UserDao implements IUserDao {
   }
 
   @Override
+  public Optional<User> findUser(String email) {
+    String sql = "SELECT id, password, name "
+        + "FROM users "
+        + "WHERE email = :email";
+    // パラメータ設定用Map
+    Map<String, Object> param = new HashMap<>();
+    param.put("email", email);
+
+    User user = new User();
+    // 一件取得
+    try {
+      Map<String, Object> result = jdbcTemplate.queryForMap(sql, param);
+      user.setId((int) result.get("id"));
+      user.setPassword((String) result.get("password"));
+      user.setName((String) result.get("name"));
+    } catch (EmptyResultDataAccessException e) {
+      Optional<User> userOpl = Optional.ofNullable(user);
+      return userOpl;
+    }
+
+    // ラップする
+    Optional<User> userOpl = Optional.ofNullable(user);
+    return userOpl;
+  }
+
+  @Override
   public int insert(UserRegisterForm form) {
     int count = 0;
-    String sql = "INSERT INTO users(name, email, age, password) VALUES(:name, :email, :age, :password);";
+    String sql = "INSERT INTO users(name, email, age, password) "
+        + "VALUES(:name, :email, :age, :password);";
 
     Map<String, Object> param = new HashMap<>();
     // paramを設定
@@ -76,7 +106,9 @@ public class UserDao implements IUserDao {
   @Override
   public int delete(Integer id) {
     int count = 0;
-    String sql = "UPDATE users SET state = 0 WHERE id = :id";
+    String sql = "UPDATE users "
+        + "SET state = 0 "
+        + "WHERE id = :id ";
 
     Map<String, Object> param = new HashMap<>();
     // paramを設定
