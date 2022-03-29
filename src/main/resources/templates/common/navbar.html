@@ -1,0 +1,4 @@
+<ul class="topnav">
+  <li><a class="active" th:href="@{/}">Spring Boot Sample App</a></li>
+  <li class="right" th:if="!${#lists.isEmpty(username)}"><a th:inline="text" style="color: white;">[[${username}]]</a></li>
+</ul>

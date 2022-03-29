@@ -1,2 +1,0 @@
-INSERT INTO users(name, email, age, state, password)
-VALUES('川田真澄', 'kawada@gmail.com', 23, 1, 'kawada123'), ('薮内れお', 'reo@sakura.com', 21, 1, 'yabuuti123'),('高坂流星', 'ryusei@gmail.com', 23, 1, 'ryusei123');

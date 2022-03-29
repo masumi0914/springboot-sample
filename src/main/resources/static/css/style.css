@@ -1,10 +1,33 @@
+ul.topnav {
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	background-color: #1b2538;
+  font-size: 20px;
+}
+ul.topnav li {
+	float: left;
+}
+ul.topnav li a {
+	display: block;
+	padding: 14px 16px;
+	text-align: center;
+	text-decoration: none;
+	color: white;
+}
+ul.topnav li.right {
+	float: right;
+}
+
 .box {
   position: absolute;
-  top: 3%;
+  top: 5%;
   left: 5%;
   right: 0%;
   width: 82%;
   font-size: 15px;
+  margin-top: 30px;
 }
 .box-header {
   position: relative;
@@ -14,6 +37,7 @@
   position: relative;
   padding: 10px 15px 30px 15px;
 }
+
 .row-buttons {
   display: flex;
 }
