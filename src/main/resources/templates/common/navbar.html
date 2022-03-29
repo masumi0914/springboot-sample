@@ -1,4 +1,11 @@
 <ul class="topnav">
-  <li><a class="active" th:href="@{/}">Spring Boot Sample App</a></li>
-  <li class="right" th:if="!${#lists.isEmpty(username)}"><a th:inline="text" style="color: white;">[[${username}]]</a></li>
+  <li><a th:href="@{/}">Spring Boot Sample App</a></li>
+  <li class="dropdown_menu" th:if="!${#strings.isEmpty(#httpServletRequest.remoteUser)}">
+    <a th:inline="text" style="color: white;">
+      [[${#httpServletRequest.remoteUser}]]
+    </a>
+    <ul class="dropdown_menu_child">
+      <li><a th:href="@{/logout}">Logout</a></li>
+    </ul>
+  </li>
 </ul>

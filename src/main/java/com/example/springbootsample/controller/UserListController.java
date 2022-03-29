@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.example.springbootsample.controller.form.UserSearchForm;
 import com.example.springbootsample.service.UserService;
@@ -51,10 +49,6 @@ public class UserListController {
    */
   @GetMapping("/")
   public String index(@ModelAttribute UserSearchForm form, Model model) {
-    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    // Principalからログインユーザの情報を取得
-    String userName = auth.getName();
-
     // ユーザー一覧を取得
     List<User> list = userService.getList(form);
 
@@ -62,7 +56,6 @@ public class UserListController {
     session.setAttribute("list", list);
 
     // 画面にデータを渡す
-    model.addAttribute("username", userName);
     model.addAttribute("userList", list);
     model.addAttribute("form", form);
 

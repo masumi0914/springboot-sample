@@ -16,9 +16,20 @@ ul.topnav li a {
 	text-decoration: none;
 	color: white;
 }
-ul.topnav li.right {
+ul.topnav li.dropdown_menu {
 	float: right;
+  position: relative;
 }
+.dropdown_menu_child li {
+  height: 0;
+  overflow: hidden;
+  transition: 0.3s;
+}
+.dropdown_menu:hover > ul > li {
+  height: 3.2rem;
+  overflow: visible;
+}
+
 
 .box {
   position: absolute;
