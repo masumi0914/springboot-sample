@@ -6,7 +6,7 @@
   <div class="box">
     <div class="box-body">
       <div th:if="${param.error}" class="alert alert-danger">
-        名前またはパスワードが正しくありません
+        メールアドレスまたはパスワードが正しくありません
       </div>
       <form th:action="@{/login}" method="post">
         <div class="row">
